@@ -5,13 +5,13 @@
             body{
                 display: flex;
                 justify-content: center;
-                align-items: center;
+                align-items: flex-start;
                 min-height: 100vh;
                 background-size: cover;
                 background-image: url("https://cdn.arstechnica.net/wp-content/uploads/2023/06/bliss-update-1440x960.jpg");
                 font-family: Arial, Helvetica, sans-serif;
                 margin: 0;
-                padding: 20px;
+                padding: 40px 20px;
             }
             .container{
                 background-color: white;
@@ -80,13 +80,53 @@
             <h1>Data Registrasi User</h1>
             
             <?php if (isset($_POST['submit'])): ?>
-                <div class="success-message">
-                    Registrasi Berhasil!
-                </div>
-                
-                <div class="back-button">
-                    <a href="index.html">Kembali ke Form Registrasi</a>
-                </div>
+                <?php
+                    $nama_lengkap = htmlspecialchars($_POST['nama_depan'] . ' ' . $_POST['nama_belakang']);
+                    $umur = (int)$_POST['umur'];
+                    $asal = strtoupper($_POST['asal_kota']);
+
+                    if ($umur < 10):
+                ?>
+                        <div class="error-message">
+                            Error: Minimal untuk Umur adalah 10 tahun!
+                        </div>
+                        <div class="back-button">
+                            <a href="index.html">Kembali ke Form Registrasi</a>
+                        </div>
+                <?php else: ?>
+                        <div class="success-message">
+                            Registrasi Berhasil!
+                        </div>
+                        
+                        <table>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Lengkap</th>
+                                <th>Umur</th>
+                                <th>Asal Kota</th>
+                            </tr>
+                            <?php
+                                $nama_lengkap = htmlspecialchars($_POST['nama_depan'] . ' ' . $_POST['nama_belakang']);
+                                $umur = (int)$_POST['umur'];
+                                $asal = strtoupper($_POST['asal_kota']);
+
+                                for ($i = 1; $i <= $umur; $i++) {
+                                    if ($i % 2 == 0 && $i != 4 && $i != 8) {
+                                        echo "<tr>";
+                                        echo "<td>$i</td>";
+                                        echo "<td>$nama_lengkap</td>";
+                                        echo "<td>{$umur} tahun</td>";
+                                        echo "<td>$asal</td>";
+                                        echo "</tr>";
+                                    }
+                                }
+                            ?>
+                        </table>
+
+                        <div class="back-button">
+                            <a href="index.html">Kembali ke Form Registrasi</a>
+                        </div>
+                <?php endif; ?>
             <?php else: ?>
                 <div style="text-align: center; color: #dc3545; padding: 20px;">
                     <h3>Error: Data tidak ditemukan</h3>
