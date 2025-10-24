@@ -97,6 +97,10 @@
                         <div class="success-message">
                             Registrasi Berhasil!
                         </div>
+
+                        <h3 style="text-align:center; color:#333; margin-bottom:15px;">
+                            Tabel Data User (Nomor Genap, Skip No 4 & 8)
+                        </h3>
                         
                         <table>
                             <tr>
